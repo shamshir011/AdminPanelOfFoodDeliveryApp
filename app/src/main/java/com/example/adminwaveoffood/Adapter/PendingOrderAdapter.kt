@@ -43,9 +43,15 @@ class PendingOrderAdapter(
             binding.apply {
                 customerName.text = name[position]
                 itemQuantity.text = quantity[position]
-                var uriString = foodImage[position]
-                var uri = Uri.parse(uriString)
-                Glide.with(context).load(uri).into(orderFoodImage)
+//                var uriString = foodImage[position]
+//                var uri = Uri.parse(uriString)
+//                Glide.with(context).load(uri).into(orderFoodImage)
+
+                val uriString = foodImage[position]
+                val uri = Uri.parse(uriString)
+                Glide.with(orderFoodImage.context)
+                    .load(uri) .
+                    into(orderFoodImage)
 
 //                val uriString =  foodImage[position]
 //                val uri = Uri.parse(uriString)

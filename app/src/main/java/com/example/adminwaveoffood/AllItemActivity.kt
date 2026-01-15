@@ -40,7 +40,7 @@ class AllItemActivity : AppCompatActivity(){
 
     }
 
-    private fun retrieveMenuItems() {
+    private fun retrieveMenuItems(){
         database = FirebaseDatabase.getInstance()
         val foodRef: DatabaseReference = database.reference.child("menu")
 

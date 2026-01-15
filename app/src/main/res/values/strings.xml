@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AdminWaveOfFood</string>
-    <string name="waves_of_food">Waves Of Food</string>
+    <string name="waves_of_food">Food Delivery App</string>
     <string name="admin_dashboard">Admin Dashboard</string>
     <string name="login_to_your_account">login_account</string>
     <string name="wave_of_food">wave_food</string>

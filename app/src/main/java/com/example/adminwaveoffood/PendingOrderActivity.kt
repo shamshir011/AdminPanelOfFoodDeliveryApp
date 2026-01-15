@@ -3,6 +3,7 @@ package com.example.adminwaveoffood
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,8 @@ class PendingOrderActivity : AppCompatActivity(), PendingOrderAdapter.OnItemClic
         enableEdgeToEdge()
         binding = ActivityPendingOrderBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.textView16.visibility = View.INVISIBLE
 
         // Initialize  database
         database = FirebaseDatabase.getInstance()
@@ -69,9 +72,13 @@ class PendingOrderActivity : AppCompatActivity(), PendingOrderAdapter.OnItemClic
             orderItem.userName?.let { listOfName.add(it) }
             orderItem.totalPrice?.let { listOfTotalPrice.add(it) }
 //            orderItem.foodImages?.filterNot { it.isEmpty() }?.let { listOfImageFirstFoodOrder.addAll(it) }
-            orderItem.foodImages?.filterNot { it.isEmpty() }?.forEach{
-                listOfImageFirstFoodOrder.add(it)
-            }
+//            orderItem.foodImages?.filterNot { it.isEmpty() }?.forEach{
+//                listOfImageFirstFoodOrder.add(it)
+//            }
+            val firstImage = orderItem.foodImages
+                ?.firstOrNull { it.isNotEmpty() }
+            listOfImageFirstFoodOrder.add(firstImage ?: "")
+
         }
         setAdapter()
     }
