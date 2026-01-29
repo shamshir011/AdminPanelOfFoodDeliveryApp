@@ -172,246 +172,314 @@
                 app:layout_constraintStart_toStartOf="@+id/textView15"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toStartOf="@+id/cardViewAllItemMenu"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/addMenu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/card_green">
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/add_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/yeon_sung"
-                android:text="Add Menu"
-                android:textColor="@color/textColor"
-                app:layout_constraintEnd_toEndOf="@+id/imageView7"
-                app:layout_constraintStart_toStartOf="@+id/imageView7"
-                app:layout_constraintTop_toBottomOf="@+id/imageView7" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewAllItemMenu"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cardView3"
-        app:layout_constraintTop_toTopOf="@+id/cardView3">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/card_green">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/eye_icon"
-                app:layout_constraintEnd_toEndOf="parent"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintEnd_toStartOf="@+id/cardViewAllItemMenu"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/yeon_sung"
-                android:text="@string/all_item_menu"
-                android:textColor="@color/textColor"
-                app:layout_constraintEnd_toEndOf="@+id/imageView8"
-                app:layout_constraintStart_toStartOf="@+id/imageView8"
-                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/addMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_green">
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/add_circle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:fontFamily="@font/yeon_sung"
+                        android:text="Add Menu"
+                        android:textColor="@color/textColor"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                        app:layout_constraintStart_toStartOf="@+id/imageView7"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewAllItemMenu"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardView3"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_green">
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/eye_icon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:fontFamily="@font/yeon_sung"
+                        android:text="@string/all_item_menu"
+                        android:textColor="@color/textColor"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                        app:layout_constraintStart_toStartOf="@+id/imageView8"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/profileCardView"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="50dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardCornerRadius="15dp"
+                    app:layout_constraintStart_toStartOf="@+id/cardView3"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView3">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_green">
+
+                        <ImageView
+                            android:id="@+id/imageView9"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/prifile_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="28dp"
+                            android:fontFamily="@font/yeon_sung"
+                            android:text="@string/profile"
+                            android:textColor="@color/textColor"
+                            app:layout_constraintEnd_toEndOf="@+id/imageView9"
+                            app:layout_constraintStart_toStartOf="@+id/imageView9"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView9"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/createNewUser"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="15dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/profileCardView"
+                    app:layout_constraintTop_toTopOf="@+id/profileCardView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_green">
+
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/add_new_user_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="28dp"
+                            android:fontFamily="@font/yeon_sung"
+                            android:text="Create New User"
+                            android:textColor="@color/textColor"
+                            app:layout_constraintEnd_toEndOf="@+id/imageView10"
+                            app:layout_constraintStart_toStartOf="@+id/imageView10"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/orderDispatcherCardView"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="50dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardCornerRadius="15dp"
+                    app:layout_constraintStart_toStartOf="@+id/profileCardView"
+                    app:layout_constraintTop_toBottomOf="@+id/profileCardView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_green">
+
+                        <ImageView
+                            android:id="@+id/imageVie11"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/shopping_bag"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="28dp"
+                            android:fontFamily="@font/yeon_sung"
+                            android:text="Order Dispatch"
+                            android:textColor="#FFC107"
+                            app:layout_constraintEnd_toEndOf="@+id/imageVie11"
+                            app:layout_constraintStart_toStartOf="@+id/imageVie11"
+                            app:layout_constraintTop_toBottomOf="@+id/imageVie11" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView6"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardCornerRadius="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/orderDispatcherCardView"
+                    app:layout_constraintTop_toTopOf="@+id/orderDispatcherCardView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/logoutButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_green">
+
+                        <ImageView
+                            android:id="@+id/imageView12"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/logout_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="28dp"
+                            android:fontFamily="@font/yeon_sung"
+                            android:text="Log Out"
+                            android:textColor="#FF0707"
+                            app:layout_constraintEnd_toEndOf="@+id/imageView12"
+                            app:layout_constraintStart_toStartOf="@+id/imageView12"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/addBannerImage"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="8dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/cardView6"
+                app:layout_constraintStart_toStartOf="@+id/orderDispatcherCardView"
+                app:layout_constraintTop_toBottomOf="@+id/orderDispatcherCardView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_green">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="28dp"
+                        android:src="@drawable/addbannerimage"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/yeon_sung"
+                        android:text="Add Banner Image"
+                        android:textColor="#FFC107"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profileCardView"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintStart_toStartOf="@+id/cardView3"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3">
+    </ScrollView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/card_green">
-
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/prifile_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/yeon_sung"
-                android:text="@string/profile"
-                android:textColor="@color/textColor"
-                app:layout_constraintEnd_toEndOf="@+id/imageView9"
-                app:layout_constraintStart_toStartOf="@+id/imageView9"
-                app:layout_constraintTop_toBottomOf="@+id/imageView9"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/createNewUser"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileCardView"
-        app:layout_constraintTop_toTopOf="@+id/profileCardView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/card_green">
-
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/add_new_user_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/yeon_sung"
-                android:text="Create New User"
-                android:textColor="@color/textColor"
-                app:layout_constraintEnd_toEndOf="@+id/imageView10"
-                app:layout_constraintStart_toStartOf="@+id/imageView10"
-                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/orderDispatcherCardView"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintStart_toStartOf="@+id/profileCardView"
-        app:layout_constraintTop_toBottomOf="@+id/profileCardView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/card_green">
-
-            <ImageView
-                android:id="@+id/imageVie11"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/shopping_bag"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/yeon_sung"
-                android:text="Order Dispatch"
-                android:textColor="#FFC107"
-                app:layout_constraintEnd_toEndOf="@+id/imageVie11"
-                app:layout_constraintStart_toStartOf="@+id/imageVie11"
-                app:layout_constraintTop_toBottomOf="@+id/imageVie11" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView6"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/orderDispatcherCardView"
-        app:layout_constraintTop_toTopOf="@+id/orderDispatcherCardView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/logoutButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/card_green">
-
-            <ImageView
-                android:id="@+id/imageView12"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/logout_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/yeon_sung"
-                android:text="Log Out"
-                android:textColor="#FF0707"
-                app:layout_constraintEnd_toEndOf="@+id/imageView12"
-                app:layout_constraintStart_toStartOf="@+id/imageView12"
-                app:layout_constraintTop_toBottomOf="@+id/imageView12" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
 
 <!--    <TextView-->
 <!--        android:id="@+id/textView12"-->

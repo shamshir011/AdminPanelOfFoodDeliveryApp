@@ -13,11 +13,17 @@
         android:theme="@style/Theme.AdminWaveOfFood"
         tools:targetApi="31">
         <activity
+            android:name=".FoodManagingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddBannerImageActivity"
+            android:exported="false" />
+        <activity
             android:name=".OrderDetailsActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".PendingOrderActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".CreateUserActivity"
             android:exported="false" />
@@ -38,17 +44,15 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainActivity"

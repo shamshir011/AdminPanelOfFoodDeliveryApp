@@ -68,6 +68,11 @@ class MainActivity : AppCompatActivity(){
             finish()
         }
 
+        binding.addBannerImage.setOnClickListener {
+            val intent = Intent(this, AddBannerImageActivity::class.java)
+            startActivity(intent)
+        }
+
         pendingOrders()
 
         completedOrders()

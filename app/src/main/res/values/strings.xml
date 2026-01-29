@@ -55,6 +55,12 @@
     <string name="order_details">Order Details</string>
     <string name="_10">10$</string>
     <string name="total_pay">Total Pay</string>
+    <string name="manageBanners">Manage Banners</string>
+    <string name="promotionalBanners">Add and update promotional banners.</string>
+    <string name="manage_categories">Manage Categories</string>
+    <string name="foodCategories">Create and organize food categories</string>
+    <string name="manageFoodItems">Manage Food Items</string>
+    <string name="addAndEditItems">Add and edit menu items</string>
 
 
 </resources>

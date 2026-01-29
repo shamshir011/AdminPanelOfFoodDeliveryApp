@@ -2,8 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="textColor">#53E88B</color>
-    <color name="startColor">#53E88B</color>
-    <color name="endColor">#15BE77</color>
+    <color name="textColor">#E23744</color>
+    <color name="startColor">#E23744</color>
+    <color name="endColor">#E23744</color>
     <color name="iconColor">#FEAD1D</color>
+    <color name="darkerOrange">#F5A623</color>
+    <color name="lightOrange">#F9B44A</color>
+    <color name="darkerGreen">#5FAF4E</color>
+    <color name="lightGreen">#8BCF6A</color>
+    <color name="darkerRed">#E23744</color>
+    <color name="lightRed">#F15C6D</color>
 </resources>
