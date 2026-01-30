@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(){
 
 
         binding.addMenu.setOnClickListener {
-            val intent = Intent(this, AddItemActivity::class.java)
+            val intent = Intent(this, DashboardActivity::class.java)
             startActivity(intent)
         }
 

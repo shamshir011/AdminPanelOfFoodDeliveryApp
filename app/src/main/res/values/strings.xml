@@ -61,6 +61,12 @@
     <string name="foodCategories">Create and organize food categories</string>
     <string name="manageFoodItems">Manage Food Items</string>
     <string name="addAndEditItems">Add and edit menu items</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="enter_food_price">Enter Food Price</string>
+    <string name="enter_category_name">Enter Category Name</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="save_category">Save Category</string>
+    <string name="update_category">Update Category</string>
 
 
 </resources>
