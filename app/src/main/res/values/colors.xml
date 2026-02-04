@@ -13,4 +13,6 @@
     <color name="darkerRed">#E23744</color>
     <color name="lightRed">#F15C6D</color>
     <color name="crimsonRed">#E23744</color>
+    <color name="darkBlue">#1E88E5</color>
+    <color name="lightBlue">#42A5F5</color>
 </resources>

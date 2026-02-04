@@ -63,8 +63,6 @@ class AllItemActivity : AppCompatActivity(){
             override fun onCancelled(error: DatabaseError) {
                 Log.d("DatabaseError", "Error: ${error.message}")
             }
-
-
         })
     }
     private fun setAdapter() {

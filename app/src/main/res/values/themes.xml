@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AdminWaveOfFood" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/design_default_color_primary</item>
+         <item name="colorPrimary">@color/crimsonRed</item>
         <item name="colorSecondary">@color/design_default_color_secondary</item>
-        <item name="colorPrimaryVariant">@color/design_default_color_primary_variant</item>
+        <item name="colorPrimaryVariant">@color/lightRed</item>
     </style>
 
     <style name="Theme.AdminWaveOfFood" parent="Base.Theme.AdminWaveOfFood"/>

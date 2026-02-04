@@ -20,7 +20,7 @@ class AddNewCategoryActivity : AppCompatActivity() {
     private var foodImageUri: Uri? = null
     private lateinit var database: FirebaseDatabase
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)

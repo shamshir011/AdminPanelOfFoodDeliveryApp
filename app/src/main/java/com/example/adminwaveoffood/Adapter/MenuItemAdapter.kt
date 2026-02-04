@@ -81,7 +81,6 @@ class MenuItemAdapter(
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, menuList.size)
         }
-
     }
 }
 
