@@ -60,7 +60,7 @@ class AddItemActivity : AppCompatActivity(){
         }
 
 
-        binding.backButton.setOnClickListener {
+        binding.backButton.setOnClickListener{
             finish()
         }
 

@@ -15,10 +15,11 @@
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +93,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/lato_bold"
                                 android:text="@string/manage_restaurant"
-                                android:textColor="@color/textColor"
+                                android:textColor="@color/darkBlue"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -239,8 +240,8 @@
                             android:layout_height="30dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
-                            android:foreground="?attr/selectableItemBackground"
                             android:background="@drawable/text_design"
+                            android:foreground="?attr/selectableItemBackground"
                             app:layout_constraintStart_toEndOf="@+id/imageView5"
                             app:layout_constraintTop_toBottomOf="@+id/textView15">
 
@@ -318,8 +319,8 @@
                             android:layout_height="30dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
-                            android:foreground="?attr/selectableItemBackground"
                             android:background="@drawable/text_design"
+                            android:foreground="?attr/selectableItemBackground"
                             app:layout_constraintStart_toEndOf="@+id/imageView6"
                             app:layout_constraintTop_toBottomOf="@+id/textView16">
 
@@ -340,6 +341,16 @@
                 </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/buttonLogOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="LogOut"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

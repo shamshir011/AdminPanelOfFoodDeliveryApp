@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManageCategoriesActivity">
+    tools:context=".ManageFoodItemActivity">
 
     <ImageView
         android:id="@+id/backNavigation"
@@ -25,15 +25,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/lato_bold"
-        android:text="Manage Categories"
+        android:text="@string/manage_food_items"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backNavigation" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/addNewCategoryId"
-        android:layout_width="170dp"
+        android:id="@+id/addNewFoodItemId"
+        android:layout_width="150dp"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:foreground="?attr/selectableItemBackground"
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="Add New Category"
+            android:text="@string/add_new_item"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
             android:src="@drawable/add_icon"
             app:layout_constraintBottom_toBottomOf="@+id/textView23"
             app:layout_constraintEnd_toStartOf="@+id/textView23"
-            app:layout_constraintTop_toTopOf="@+id/textView23" />
+            app:layout_constraintTop_toTopOf="@+id/textView23"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

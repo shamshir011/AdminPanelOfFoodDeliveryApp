@@ -1,12 +1,14 @@
 package com.example.adminwaveoffood.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.adminwaveoffood.Adapter.MenuItemAdapter.ViewHolder
+import com.example.adminwaveoffood.UpdateCategoryDataActivity
 import com.example.adminwaveoffood.databinding.ItemItemBinding
 import com.example.adminwaveoffood.databinding.ManageCategoriesLayoutDesignBinding
 import com.example.adminwaveoffood.model.AllMenu
@@ -45,11 +47,14 @@ class ShowCategoryAdapter(
 
                 binding.btnDelete.setOnClickListener {
                     onDeleteClickListener(position)
+                }
 
-//                    val itemPosition =  adapterPosition
-//                    if(itemPosition != RecyclerView.NO_POSITION){
-//                        deleteItem(position)
-//                    }
+                binding.categoryEdit.setOnClickListener {
+                    val intent = Intent(context, UpdateCategoryDataActivity::class.java)
+                    intent.putExtra("categoryId", categoryList[position].key)
+                    intent.putExtra("name",categoryList[position].foodCategoryName)
+                    intent.putExtra("imageUrl", categoryList[position].foodCategoryImage)
+                    context.startActivity(intent)
                 }
             }
         }

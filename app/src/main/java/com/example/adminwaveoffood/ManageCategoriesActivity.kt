@@ -23,6 +23,9 @@ class ManageCategoriesActivity : AppCompatActivity() {
     private lateinit var  databaseReference: DatabaseReference
     private lateinit var database: FirebaseDatabase
     private var categoryItems: ArrayList<FoodCategory> = ArrayList()
+//private val categoryItems = ArrayList<FoodCategory>()
+    private lateinit var showCategoryAdapter: ShowCategoryAdapter
+
     private val binding: ActivityManageCategoriesBinding by lazy {
         ActivityManageCategoriesBinding.inflate(layoutInflater)
     }
@@ -30,6 +33,7 @@ class ManageCategoriesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
+//        showCategoryAdapter = ShowCategoryAdapter(this, categoryItems)
 
         databaseReference = FirebaseDatabase.getInstance().reference
         retrieveCategoryItems()
@@ -37,6 +41,10 @@ class ManageCategoriesActivity : AppCompatActivity() {
         binding.addNewCategoryId.setOnClickListener{
             val intent = Intent(this, AddNewCategoryActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.backNavigation.setOnClickListener {
+            finish()
         }
 
     }
@@ -66,15 +74,15 @@ class ManageCategoriesActivity : AppCompatActivity() {
             }
         })
     }
-
-
     private fun setAdapter() {
-        val adapter = ShowCategoryAdapter(this, categoryItems, databaseReference){ position ->
+        showCategoryAdapter = ShowCategoryAdapter(this, categoryItems, databaseReference) { position ->
             deleteMenuItems(position)
         }
         binding.categoryRecyclerview.layoutManager = LinearLayoutManager(this)
-        binding.categoryRecyclerview.adapter = adapter
+        binding.categoryRecyclerview.adapter = showCategoryAdapter
+
     }
+
 
     private fun deleteMenuItems(position: Int){
         val categoryItemToDelete = categoryItems[position]
@@ -90,4 +98,31 @@ class ManageCategoriesActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        fetchCategories()
+    }
+
+
+    private fun fetchCategories() {
+        database.getReference("FoodCategory")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    categoryItems.clear()
+
+                    for (data in snapshot.children) {
+                        val category = data.getValue(FoodCategory::class.java)
+                        category?.key = data.key
+                        category?.let { categoryItems.add(it) }
+                    }
+
+                    showCategoryAdapter.notifyDataSetChanged() // ✅ HERE
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+    }
+
 }

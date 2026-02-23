@@ -75,6 +75,23 @@
     <string name="edit_restaurant"><![CDATA[Edit restaurant details, timing & status]]></string>
     <string name="manage_restaurant">Manage Restaurant</string>
     <string name="pizza">Pizza</string>
+    <string name="restaurant_name">Restaurant Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="opening_time">Opening time</string>
+    <string name="closing_time">Closing time</string>
+    <string name="delivery_radius">Delivery Radius</string>
+    <string name="open">Open</string>
+    <string name="status">Status : </string>
+    <string name="save_changes">Save Changes</string>
+    <string name="upload">Upload</string>
+    <string name="delivery_duration">Delivery Duration</string>
+    <string name="manage_food_items">Manage Food Items</string>
+    <string name="add_new_item">Add New Item</string>
+    <string name="food_title">Food Title</string>
+    <string name="price">Price</string>
+    <string name="category">Category</string>
+    <string name="fast_food">Fast Food</string>
+    <string name="italian">Italian</string>
 
 
 </resources>

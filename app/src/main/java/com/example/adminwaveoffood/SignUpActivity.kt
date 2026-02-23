@@ -52,6 +52,9 @@ class SignUpActivity : AppCompatActivity(){
             if(userName.isBlank() || nameOfRestaurant.isBlank() || email.isBlank() || password.isBlank()){
                 Toast.makeText(this,"Please fill all details", Toast.LENGTH_SHORT).show()
             }
+            else if (password.length < 8) {
+                Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+            }
             else{
                 createAccount(email,password)
             }
@@ -59,13 +62,15 @@ class SignUpActivity : AppCompatActivity(){
 
         binding.alreadyHaveAccountButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+            finish()
         }
 
-        val locationList = arrayOf("Bihar","Delhi", "Mumbai", "Noida","Jaipur", "Odisha", "Kolkata")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,locationList)
-        val autoCompleteTextView = binding.listOfLocation
-        autoCompleteTextView.setAdapter(adapter)
+//        val locationList = arrayOf("Bihar","Delhi", "Mumbai", "Noida","Jaipur", "Odisha", "Kolkata")
+//        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,locationList)
+//        val autoCompleteTextView = binding.listOfLocation
+//        autoCompleteTextView.setAdapter(adapter)
 
 
 
@@ -80,11 +85,12 @@ class SignUpActivity : AppCompatActivity(){
                 saveUserData()
 
                 val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 finish()
             }
             else{
-                Toast.makeText(this,"Account creation failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,task.exception?.message, Toast.LENGTH_SHORT).show()
                 Log.d("Account", "createAccount: Failure", task.exception)
             }
         }

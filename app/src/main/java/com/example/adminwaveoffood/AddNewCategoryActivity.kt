@@ -15,7 +15,6 @@ class AddNewCategoryActivity : AppCompatActivity() {
     private val binding: ActivityAddNewCategoryBinding by lazy {
         ActivityAddNewCategoryBinding.inflate(layoutInflater)
     }
-
     private lateinit var foodCategoryName: String
     private var foodImageUri: Uri? = null
     private lateinit var database: FirebaseDatabase
@@ -38,7 +37,11 @@ class AddNewCategoryActivity : AppCompatActivity() {
             }
         }
 
-        binding.uploadImage.setOnClickListener {
+        binding.backNavigation.setOnClickListener {
+            finish()
+        }
+
+        binding.uploadImage.setOnClickListener{
             pickImage.launch("image/*")
         }
     }
@@ -80,13 +83,10 @@ class AddNewCategoryActivity : AppCompatActivity() {
             Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
         }
     }
-
     val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()){uri ->
         if(uri != null){
             binding.selectedImage.setImageURI(uri)
             foodImageUri = uri
         }
     }
-
-
 }

@@ -3,8 +3,11 @@
     <style name="Base.Theme.AdminWaveOfFood" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/crimsonRed</item>
-        <item name="colorSecondary">@color/design_default_color_secondary</item>
+        <item name="colorSecondary">@color/darkGreen</item>
         <item name="colorPrimaryVariant">@color/lightRed</item>
+
+        <item name="android:statusBarColor">@color/crimsonRed</item>
+
     </style>
 
     <style name="Theme.AdminWaveOfFood" parent="Base.Theme.AdminWaveOfFood"/>

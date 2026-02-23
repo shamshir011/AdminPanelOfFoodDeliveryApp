@@ -1,7 +1,7 @@
 package com.example.adminwaveoffood.model
 
 data class FoodCategory(
-    val key: String? = null,
-    val foodCategoryName: String? = null,
-    val foodCategoryImage: String? = null
+    var key: String? = null,
+    var foodCategoryName: String? = null,
+    var foodCategoryImage: String? = null
 )

@@ -39,48 +39,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/yeon_sung"
-        android:text="Waves Of Food"
+        android:fontFamily="@font/lato_bold"
+        android:text="Food Delivery App"
         android:textColor="@color/black"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/yeon_sung"
-        android:text="Choose Your Location"
-        android:textColor="@color/textColor"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/yeon_sung"-->
+<!--        android:text="Choose Your Location"-->
+<!--        android:textColor="@color/textColor"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/textInputLayout" />-->
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        app:endIconDrawable="@drawable/arrow_circle_down"
-        app:boxStrokeWidthFocused="0dp"
-        app:boxStrokeWidth="0dp"
-        app:endIconTint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7">
-        <AutoCompleteTextView
-            android:id="@+id/listOfLocation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/choose_location"
-            android:inputType="none"
-            android:fontFamily="@font/lato"/>
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/textInputLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="57dp"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"-->
+<!--        app:endIconDrawable="@drawable/arrow_circle_down"-->
+<!--        app:boxStrokeWidthFocused="0dp"-->
+<!--        app:boxStrokeWidth="0dp"-->
+<!--        app:endIconTint="@color/black"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView7">-->
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/listOfLocation"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="@string/choose_location"-->
+<!--            android:inputType="none"-->
+<!--            android:fontFamily="@font/lato"/>-->
 
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
     <EditText
         android:id="@+id/restaurantName"
@@ -167,7 +167,7 @@
         android:id="@+id/name"
         android:layout_width="325dp"
         android:layout_height="57dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/edittextshape"
         android:drawableStart="@drawable/user_new"
         android:drawablePadding="15dp"
@@ -177,9 +177,9 @@
         android:hint="@string/name_of_owner"
         android:inputType="textPersonName"
         android:paddingStart="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
 
     <TextView

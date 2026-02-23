@@ -15,4 +15,6 @@
     <color name="crimsonRed">#E23744</color>
     <color name="darkBlue">#1E88E5</color>
     <color name="lightBlue">#42A5F5</color>
+    <color name="darkGreen">#2E7D32</color>
+    <color name="red">#E60000</color>
 </resources>
