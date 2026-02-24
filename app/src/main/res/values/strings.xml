@@ -92,6 +92,9 @@
     <string name="category">Category</string>
     <string name="fast_food">Fast Food</string>
     <string name="italian">Italian</string>
+    <string name="food_name">Food Name</string>
+    <string name="_299">299</string>
+    <string name="currency">₹</string>
 
 
 </resources>

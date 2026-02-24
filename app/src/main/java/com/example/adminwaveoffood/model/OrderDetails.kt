@@ -7,75 +7,72 @@ import java.io.Serializable
 //import kotlinx.parcelize.Parcelize
 
 //@Parcelize
-class OrderDetails(): Serializable{
-    var userUid: String? = null
-    var userName: String? = null
-    var foodNames: MutableList<String>? = null
-    var foodImages: MutableList<String>? = null
-    var foodPrices: MutableList<String>? = null
-    var foodQuantities: MutableList<Int>? = null
-    var address: String? = null
-    var totalPrice: String? = null
-    var phoneNumber: String? = null
-    var orderAccepted: Boolean = false
-    var paymentReceived: Boolean = false
-    var itemPushKey: String? = null
-    var currentTime: Long = 0
-
-
-    constructor(parcel: Parcel) : this(){
-        userUid = parcel.readString()
-        userName = parcel.readString()
-        address = parcel.readString()
-        totalPrice = parcel.readString()
-        phoneNumber = parcel.readString()
-        orderAccepted = parcel.readByte() != 0.toByte()
-        paymentReceived = parcel.readByte() != 0.toByte()
-        itemPushKey = parcel.readString()
-        currentTime = parcel.readLong()
-    }
-
-     fun describeContents(): Int {
-        TODO("Not yet implemented")
-    }
-
-     fun writeToParcel(p0: Parcel, p1: Int) {
-        TODO("Not yet implemented")
-    }
-    companion object CREATOR: Parcelable.Creator<OrderDetails> {
-        override fun createFromParcel(parcel: Parcel): OrderDetails {
-            return OrderDetails(parcel)
-        }
-
-        override fun newArray(size: Int): Array<OrderDetails?>{
-            return arrayOfNulls(size)
-        }
-    }
-}
-
-
-
-
-//    (
-//    var userUid: String? = null,
-//    var userName: String? = null,
-//    var foodNames: MutableList<String>? = null,
-//    var foodImages: MutableList<String>? = null,
-//    var foodPrices: MutableList<String>? = null,
-//    var foodQuantities: MutableList<Int>? = null,  // ✅ Int instead of String
-//    var address: String? = null,
-//    var totalPrice: String? = null,
-//    var phoneNumber: String? = null,
-//    var orderAccepted: Boolean = false,
-//    var paymentReceived: Boolean = false,
-//    var itemPushKey: String? = null,
+//class OrderDetails(): Serializable{
+//    var userUid: String? = null
+//    var userName: String? = null
+//    var restaurantId: String? = null
+//    var foodNames: MutableList<String>? = null
+//    var foodImages: MutableList<String>? = null
+//    var foodPrices: MutableList<String>? = null
+//    var foodQuantities: MutableList<Int>? = null
+//    var address: String? = null
+//    var totalPrice: String? = null
+//    var phoneNumber: String? = null
+//    var orderAccepted: Boolean = false
+//    var paymentReceived: Boolean = false
+//    var itemPushKey: String? = null
 //    var currentTime: Long = 0
-//): Parcelable
-//    override fun describeContents(): Int {
+//
+//
+//    constructor(parcel: Parcel) : this(){
+//        userUid = parcel.readString()
+//        userName = parcel.readString()
+//        address = parcel.readString()
+//        totalPrice = parcel.readString()
+//        phoneNumber = parcel.readString()
+//        orderAccepted = parcel.readByte() != 0.toByte()
+//        paymentReceived = parcel.readByte() != 0.toByte()
+//        itemPushKey = parcel.readString()
+//        currentTime = parcel.readLong()
+//    }
+//
+//     fun describeContents(): Int {
 //        TODO("Not yet implemented")
 //    }
 //
-//    override fun writeToParcel(p0: Parcel, p1: Int) {
+//     fun writeToParcel(p0: Parcel, p1: Int) {
 //        TODO("Not yet implemented")
 //    }
+//    companion object CREATOR: Parcelable.Creator<OrderDetails> {
+//        override fun createFromParcel(parcel: Parcel): OrderDetails {
+//            return OrderDetails(parcel)
+//        }
+//
+//        override fun newArray(size: Int): Array<OrderDetails?>{
+//            return arrayOfNulls(size)
+//        }
+//    }
 //}
+
+data class OrderDetails(
+
+    var userUid: String? = null,
+    var userName: String? = null,
+    var restaurantId: String? = null,
+
+    var foodNames: MutableList<String>? = null,
+    var foodImages: MutableList<String>? = null,
+    var foodPrices: MutableList<String>? = null,
+    var foodQuantities: MutableList<Int>? = null,
+
+    var address: String? = null,
+    var totalPrice: String? = null,
+    var phoneNumber: String? = null,
+
+    var orderAccepted: Boolean = false,
+    var paymentReceived: Boolean = false,
+
+    var itemPushKey: String? = null,
+    var currentTime: Long = 0
+
+) : Serializable
