@@ -2,20 +2,17 @@ package com.example.adminwaveoffood.Adapter
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.adminwaveoffood.OrderDetailsActivity
-import com.example.adminwaveoffood.databinding.OrderDetailItemBinding
 import com.example.adminwaveoffood.databinding.OrdersItemBinding
 import com.example.adminwaveoffood.model.OrderDetails
 
-class OrderDetailsAdapter(
+class OrderAdapter(
     private val context: Context,
     private val orderList: List<OrderDetails>
-) : RecyclerView.Adapter<OrderDetailsAdapter.OrderViewHolder>() {
+) : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
     inner class OrderViewHolder(private val binding: OrdersItemBinding)
         : RecyclerView.ViewHolder(binding.root) {
