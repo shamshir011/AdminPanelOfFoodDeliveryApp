@@ -8,59 +8,66 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.adminwaveoffood.OrderDetailsActivity
+import com.example.adminwaveoffood.R
 import com.example.adminwaveoffood.databinding.OrderDetailItemBinding
 import com.example.adminwaveoffood.databinding.OrdersItemBinding
 import com.example.adminwaveoffood.model.OrderDetails
 
 class OrderDetailsAdapter(
     private val context: Context,
-    private val orderList: List<OrderDetails>
-) : RecyclerView.Adapter<OrderDetailsAdapter.OrderViewHolder>() {
+    private val foodNames: ArrayList<String>,
+    private val foodImages: ArrayList<String>,
+    private val foodQuantities: ArrayList<Int>,
+    private val foodPrices: ArrayList<String>
+) : RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder>() {
 
-    inner class OrderViewHolder(private val binding: OrdersItemBinding)
+    inner class ViewHolder(private val binding: OrderDetailItemBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(order: OrderDetails) {
+        fun bind(position: Int) {
 
             binding.apply {
 
-                // Customer name
-                textViewName.text = order.userName ?: "Unknown"
+                // Food name
+                foodName.text = foodNames[position]
 
-                // Phone number
-                textViewPhoneNumber.text = order.phoneNumber ?: "N/A"
+                // Quantity
+                foodQuantity.text = foodQuantities[position].toString()
 
-                // Short Order ID (last 6 characters)
-                textView31.text = order.itemPushKey?.takeLast(6) ?: "N/A"
+                // Price
+                foodPrice.text = foodPrices[position]
 
-                // Click → open OrderDetailsActivity
-                root.setOnClickListener {
+                // Load image (Recommended: Glide)
+                if (foodImages[position].isNotEmpty()) {
 
-                    val intent = Intent(context, OrderDetailsActivity::class.java)
-                    intent.putExtra("order", order)
-                    context.startActivity(intent)
+                    Glide.with(context)
+                        .load(foodImages[position])
+                        .placeholder(R.drawable.prifile_icon)
+                        .into(cartImage)
 
+                } else {
+                    cartImage.setImageResource(R.drawable.prifile_icon)
                 }
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val binding = OrdersItemBinding.inflate(
+        val binding = OrderDetailItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
 
-        return OrderViewHolder(binding)
+        return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = orderList.size
+    override fun getItemCount(): Int {
+        return foodNames.size
+    }
 
-    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-
-        holder.bind(orderList[position])
-
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(position)
     }
 }
