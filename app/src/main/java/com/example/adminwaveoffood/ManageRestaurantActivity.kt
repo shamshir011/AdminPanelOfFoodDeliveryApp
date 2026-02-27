@@ -95,21 +95,6 @@ class ManageRestaurantActivity : AppCompatActivity() {
         binding.textViewSelectImage.setOnClickListener{
             pickImage.launch("image/*")
         }
-
-
-//        binding.switchStatus.setOnCheckedChangeListener { _, isChecked ->
-//            if (isChecked) {
-//                binding.statusLeftOpen.text = "Open"
-//                binding.statusRightOpen.text = "Open"
-//                binding.statusLeftOpen.setTextColor(getColor(R.color.darkGreen))
-//                binding.statusRightOpen.setTextColor(getColor(R.color.darkGreen))
-//            } else {
-//                binding.statusLeftOpen.text = "Closed"
-//                binding.statusRightOpen.text = "Closed"
-//                binding.statusLeftOpen.setTextColor(getColor(R.color.red))
-//                binding.statusRightOpen.setTextColor(getColor(R.color.red))
-//            }
-//        }
     }
 
     private fun openTimePicker() {
@@ -147,57 +132,6 @@ class ManageRestaurantActivity : AppCompatActivity() {
             true
         ).show()
     }
-
-
-//    private fun uploadData(){
-//        // get a reference to the "menu" node in the database
-//        val menuRef = database.getReference("Restaurant")
-//        //Generate a unique key for the new menu item
-//        val newItemKey = menuRef.push().key
-//
-//        if(foodImageUri != null){
-//            val storageRef = FirebaseStorage.getInstance().reference
-//            val imageRef = storageRef.child("restaurant_images/${newItemKey}.jpg")
-//            val uploadTask = imageRef.putFile(foodImageUri!!)
-//
-////            val restaurantStatus = binding.switchStatus.isChecked
-//
-//            uploadTask.addOnSuccessListener{
-//                imageRef.downloadUrl.addOnSuccessListener{
-//                        downloadUrl->
-//                    //Create a new menu item
-//                    val newItem = Restaurant(
-//                        newItemKey,
-//                        restaurantImage = downloadUrl.toString(),
-//                        restaurantName = restaurantName,
-//                        restaurantPhone = restaurantPhone,
-//                        restaurantAddress = restaurantAddress,
-//                        restaurantDeliveryRadius = restaurantDeliveryRadius,
-//                        restaurantDeliveryDuration = restaurantDeliveryDuration,
-//                        restaurantOpeningTime = restaurantOpeningTime,
-//                        restaurantClosingTime = restaurantClosingTime,
-////                        restaurantStatus = restaurantStatus
-//
-//                    )
-//                    newItemKey?.let {
-//                            key->
-//                        menuRef.child(key).setValue(newItem).addOnSuccessListener {
-//                            Toast.makeText(this, "data uploaded successfully", Toast.LENGTH_SHORT).show()
-//                        }.addOnFailureListener {
-//                            Toast.makeText(this, "data uploaded failed", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                }
-//            }.addOnFailureListener{
-//                Toast.makeText(this, "image upload failed", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-////        else{
-////            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
-////        }
-//    }
-
-
     private fun uploadData() {
 
         val categoryMap = hashMapOf<String, Boolean>()
@@ -272,8 +206,6 @@ class ManageRestaurantActivity : AppCompatActivity() {
                 Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show()
             }
     }
-
-
     val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()){uri ->
         if(uri != null){
             binding.restaurantImage.setImageURI(uri)

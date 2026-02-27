@@ -1,5 +1,6 @@
 package com.example.adminwaveoffood.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,9 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminwaveoffood.Adapter.OrderAdapter
-import com.example.adminwaveoffood.Adapter.OrderDetailsAdapter
-import com.example.adminwaveoffood.R
-import com.example.adminwaveoffood.databinding.FragmentDashboardBinding
+import com.example.adminwaveoffood.ManageCategoriesActivity
+import com.example.adminwaveoffood.PendingOrderActivity
 import com.example.adminwaveoffood.databinding.FragmentOrderBinding
 import com.example.adminwaveoffood.model.OrderDetails
 import com.google.firebase.auth.FirebaseAuth
@@ -42,11 +42,16 @@ class OrderFragment : Fragment() {
 
         loadOrders()
 
+        binding.pendingOrder.setOnClickListener {
+            val intent = Intent(context, PendingOrderActivity::class.java)
+            startActivity(intent)
+        }
+
         return binding.root
     }
 
     private fun loadOrders() {
-
+        binding.progressBar.visibility = View.VISIBLE
         val restaurantId = FirebaseAuth.getInstance().currentUser!!.uid
 
         FirebaseDatabase.getInstance().reference
@@ -70,9 +75,14 @@ class OrderFragment : Fragment() {
                         }
                     }
 
+// ***********************                   Its for counting recyclerview item     ***************************************
+
+                    binding.textViewPendingCount.text = "${orderList.size}"
+                    adapter.notifyDataSetChanged()
+                    binding.progressBar.visibility = View.GONE
+
                     adapter.notifyDataSetChanged()
                 }
-
                 override fun onCancelled(error: DatabaseError) {}
             })
     }

@@ -8,134 +8,72 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.adminwaveoffood.Adapter.OrderAdapter
 import com.example.adminwaveoffood.Adapter.PendingOrderAdapter
 import com.example.adminwaveoffood.databinding.ActivityPendingOrderBinding
+import com.example.adminwaveoffood.databinding.FragmentOrderBinding
 import com.example.adminwaveoffood.model.OrderDetails
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class PendingOrderActivity : AppCompatActivity(), PendingOrderAdapter.OnItemClicked{
-    private lateinit var binding: ActivityPendingOrderBinding
-    private var listOfName: MutableList<String> = mutableListOf()
-    private var listOfTotalPrice: MutableList<String> = mutableListOf()
-    private var listOfImageFirstFoodOrder: MutableList<String> = mutableListOf()
-    private var listOfOrderItem: ArrayList<OrderDetails> = arrayListOf()
+class PendingOrderActivity : AppCompatActivity(){
+    private val binding: ActivityPendingOrderBinding by lazy {
+        ActivityPendingOrderBinding.inflate(layoutInflater)
+    }
     private lateinit var database: FirebaseDatabase
-    private lateinit var databaseOrderDetails: DatabaseReference
+    private lateinit var adapter: OrderAdapter
+    private var orderList: ArrayList<OrderDetails> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityPendingOrderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.textView16.visibility = View.INVISIBLE
 
-        // Initialize  database
-        database = FirebaseDatabase.getInstance()
-        // Initialization of database reference
-        databaseOrderDetails = database.reference.child("OrderDetails")
+        adapter = OrderAdapter(this, orderList)
+        binding.pendingOrderRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.pendingOrderRecyclerView.adapter = adapter
 
-        getOrderDetails()
-
+        loadOrders()
         binding.backButton.setOnClickListener {
             finish()
         }
     }
 
-    private fun getOrderDetails() {
-        // Retrieve order details from firebase database
-        databaseOrderDetails.addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (orderSnapshot in snapshot.children) {
-                    val orderDetails = orderSnapshot.getValue(OrderDetails::class.java)
-                    orderDetails?.let {
-                        listOfOrderItem.add(it)
+    private fun loadOrders() {
+        binding.pendingProgressBar.visibility = View.VISIBLE
+        val restaurantId = FirebaseAuth.getInstance().currentUser!!.uid
+
+        FirebaseDatabase.getInstance().reference
+            .child("restaurantOrders")
+            .child(restaurantId)   // VERY IMPORTANT
+            .addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    orderList.clear()
+
+                    for (orderSnapshot in snapshot.children) {
+
+                        val order = orderSnapshot
+                            .getValue(OrderDetails::class.java)
+
+                        order?.itemPushKey = orderSnapshot.key
+
+                        if (order != null) {
+                            orderList.add(order)
+                        }
                     }
+
+                    binding.pendingProgressBar.visibility = View.GONE
+
+                    adapter.notifyDataSetChanged()
                 }
-                addDataToListForRecyclerView()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
-    }
-
-    private fun addDataToListForRecyclerView() {
-        for (orderItem in listOfOrderItem) {
-
-            //Add data to respective list for populating the recyclerView
-            orderItem.userName?.let { listOfName.add(it) }
-            orderItem.totalPrice?.let { listOfTotalPrice.add(it) }
-//            orderItem.foodImages?.filterNot { it.isEmpty() }?.let { listOfImageFirstFoodOrder.addAll(it) }
-//            orderItem.foodImages?.filterNot { it.isEmpty() }?.forEach{
-//                listOfImageFirstFoodOrder.add(it)
-//            }
-            val firstImage = orderItem.foodImages
-                ?.firstOrNull { it.isNotEmpty() }
-            listOfImageFirstFoodOrder.add(firstImage ?: "")
-
-        }
-        setAdapter()
-    }
-
-    private fun setAdapter() {
-        binding.pendingOrderRecyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter =
-            PendingOrderAdapter(this, listOfName, listOfTotalPrice, listOfImageFirstFoodOrder, this)
-        binding.pendingOrderRecyclerView.adapter = adapter
-    }
-
-    override fun onItemClickListener(position: Int) {
-        val intent = Intent(this, OrderDetailsActivity::class.java)
-        val userOrderDetails = listOfOrderItem[position]
-        intent.putExtra("UserOrderDetails", userOrderDetails)
-        startActivity(intent)
-    }
-
-    override fun onItemAcceptClickListener(position: Int){
-        //Handle item acceptance and update database
-        val childItemPushKey = listOfOrderItem[position].itemPushKey
-        val clickItemOrderReference = childItemPushKey?.let{
-            database.reference.child("OrderDetails").child(it)
-        }
-        clickItemOrderReference?.child("orderAccepted")?.setValue(true)
-        updateOrderAcceptStatus(position)
-    }
-
-
-    override fun onItemDispatchClickListener(position: Int) {
-        //Handle item dispatch and update database
-        val dispatchItemPushKey = listOfOrderItem[position].itemPushKey
-        val dispatchItemOrderReference = database.reference.child("CompletedOrder").child(dispatchItemPushKey!!)
-        dispatchItemOrderReference.setValue(listOfOrderItem[position])
-            .addOnSuccessListener {
-                deleteThisItemFromOrderDetails(dispatchItemPushKey)
-            }
-    }
-
-    private fun deleteThisItemFromOrderDetails(dispatchItemPushKey: String){
-        val orderDetailsItemReference = database.reference.child("OrderDetails").child(dispatchItemPushKey)
-        orderDetailsItemReference.removeValue()
-            .addOnSuccessListener {
-                Toast.makeText(this,"Order is dispatched", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this,"Order is not dispatched", Toast.LENGTH_SHORT).show()
-            }
-    }
-    private fun updateOrderAcceptStatus(position: Int) {
-        //Update order acceptance in user's BuyHistory and OrderDetails
-        val userIdOfClickedItem = listOfOrderItem[position].userUid
-        val pushKeyOfClickedItem = listOfOrderItem[position].itemPushKey
-        val buyHistoryReference =
-            database.reference.child("user").child(userIdOfClickedItem!!).child("BuyHistory")
-                .child(pushKeyOfClickedItem!!)
-        buyHistoryReference.child("orderAccepted").setValue(true)
-        databaseOrderDetails.child(pushKeyOfClickedItem).child("orderAccepted").setValue(true)
+                override fun onCancelled(error: DatabaseError) {}
+            })
     }
 }

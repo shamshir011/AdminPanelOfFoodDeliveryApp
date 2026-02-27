@@ -7,10 +7,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.adminwaveoffood.Adapter.MenuItemAdapter
 import com.example.adminwaveoffood.Adapter.ShowCategoryAdapter
 import com.example.adminwaveoffood.databinding.ActivityManageCategoriesBinding
-import com.example.adminwaveoffood.model.AllMenu
 import com.example.adminwaveoffood.model.FoodCategory
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,7 +21,6 @@ class ManageCategoriesActivity : AppCompatActivity() {
     private lateinit var  databaseReference: DatabaseReference
     private lateinit var database: FirebaseDatabase
     private var categoryItems: ArrayList<FoodCategory> = ArrayList()
-//private val categoryItems = ArrayList<FoodCategory>()
     private lateinit var showCategoryAdapter: ShowCategoryAdapter
 
     private val binding: ActivityManageCategoriesBinding by lazy {
