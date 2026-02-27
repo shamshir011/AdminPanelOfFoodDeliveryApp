@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminwaveoffood.Adapter.OrderAdapter
 import com.example.adminwaveoffood.ManageCategoriesActivity
+import com.example.adminwaveoffood.OrderAcceptedActivity
 import com.example.adminwaveoffood.PendingOrderActivity
 import com.example.adminwaveoffood.databinding.FragmentOrderBinding
 import com.example.adminwaveoffood.model.OrderDetails
@@ -47,42 +48,142 @@ class OrderFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.acceptedOrder.setOnClickListener {
+            val intent = Intent(context, OrderAcceptedActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
         return binding.root
     }
 
+//    private fun loadOrders() {
+//        binding.progressBar.visibility = View.VISIBLE
+//        val restaurantId = FirebaseAuth.getInstance().currentUser!!.uid
+//
+//        FirebaseDatabase.getInstance().reference
+//            .child("restaurantOrders")
+//            .child(restaurantId)   // VERY IMPORTANT
+//            .addValueEventListener(object : ValueEventListener {
+//
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//
+//                    orderList.clear()
+//
+//                    for (orderSnapshot in snapshot.children) {
+//
+//                        val order = orderSnapshot
+//                            .getValue(OrderDetails::class.java)
+//
+//                        order?.itemPushKey = orderSnapshot.key
+//
+//                        if (order != null) {
+//                            orderList.add(order)
+//                        }
+//                    }
+//
+//// ***********************                   Its for counting recyclerview item     ***************************************
+//
+//                    binding.textViewPendingCount.text = "${orderList.size}"
+//                    adapter.notifyDataSetChanged()
+//                    binding.progressBar.visibility = View.GONE
+//
+//                    adapter.notifyDataSetChanged()
+//                }
+//                override fun onCancelled(error: DatabaseError) {}
+//            })
+//    }
+
+
+//    private fun loadOrders() {
+//
+//        binding.progressBar.visibility = View.VISIBLE
+//
+//        val restaurantId = FirebaseAuth.getInstance().currentUser!!.uid
+//
+//        FirebaseDatabase.getInstance().reference
+//            .child("restaurantOrders")
+//            .child(restaurantId)
+//            .addValueEventListener(object : ValueEventListener {
+//
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//
+//                    orderList.clear()
+//                    var pendingCount = 0
+//
+//                    for (orderSnapshot in snapshot.children){
+//
+//                        val order = orderSnapshot.getValue(OrderDetails::class.java)
+//
+//                        if (order != null) {
+//
+//                            order.itemPushKey = orderSnapshot.key
+//
+////                            if (order.status == "Pending") {
+////
+////                                orderList.add(order)
+////                                pendingCount++
+////                            }
+//                            if (order.orderAccepted == false) {
+//                                orderList.add(order)
+//                                pendingCount++
+//                            }
+//                        }
+//                    }
+//
+//                    binding.textViewPendingCount.text = pendingCount.toString()
+//
+//                    adapter.notifyDataSetChanged()
+//                    binding.progressBar.visibility = View.GONE
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {}
+//            })
+//    }
+
     private fun loadOrders() {
+
         binding.progressBar.visibility = View.VISIBLE
+
         val restaurantId = FirebaseAuth.getInstance().currentUser!!.uid
 
         FirebaseDatabase.getInstance().reference
             .child("restaurantOrders")
-            .child(restaurantId)   // VERY IMPORTANT
+            .child(restaurantId)
             .addValueEventListener(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     orderList.clear()
 
-                    for (orderSnapshot in snapshot.children) {
+                    var pendingCount = 0
+                    var acceptedCount = 0   // 👈 NEW
 
-                        val order = orderSnapshot
-                            .getValue(OrderDetails::class.java)
+                    for (orderSnapshot in snapshot.children){
 
-                        order?.itemPushKey = orderSnapshot.key
+                        val order = orderSnapshot.getValue(OrderDetails::class.java)
 
                         if (order != null) {
-                            orderList.add(order)
+
+                            order.itemPushKey = orderSnapshot.key
+
+                            if (!order.orderAccepted) {
+                                orderList.add(order)   // Show only pending in list
+                                pendingCount++
+                            } else {
+                                acceptedCount++       // 👈 Count accepted
+                            }
                         }
                     }
 
-// ***********************                   Its for counting recyclerview item     ***************************************
+                    binding.textViewPendingCount.text = pendingCount.toString()
+                    binding.textViewAcceptedOrder.text = acceptedCount.toString() // 👈 NEW
 
-                    binding.textViewPendingCount.text = "${orderList.size}"
                     adapter.notifyDataSetChanged()
                     binding.progressBar.visibility = View.GONE
-
-                    adapter.notifyDataSetChanged()
                 }
+
                 override fun onCancelled(error: DatabaseError) {}
             })
     }

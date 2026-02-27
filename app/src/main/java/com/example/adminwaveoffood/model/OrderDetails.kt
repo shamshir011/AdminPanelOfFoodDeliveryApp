@@ -59,6 +59,7 @@ data class OrderDetails(
     var userUid: String? = null,
     var userName: String? = null,
     var restaurantId: String? = null,
+    var status: String? = null,
 
     var foodNames: MutableList<String>? = null,
     var foodImages: MutableList<String>? = null,
