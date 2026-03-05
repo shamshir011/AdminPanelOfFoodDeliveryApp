@@ -13,6 +13,7 @@ import com.example.adminwaveoffood.Adapter.OrderDetailsAdapter
 import com.example.adminwaveoffood.Adapter.PendingOrderAdapter
 import com.example.adminwaveoffood.databinding.ActivityOrderDetailsBinding
 import com.example.adminwaveoffood.model.OrderDetails
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -30,34 +31,72 @@ class OrderDetailsActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             finish()
         }
-
         binding.acceptButton.setOnClickListener {
 
             val order = orderDetails ?: return@setOnClickListener
-
-            val restaurantId = order.restaurantId
-                ?: FirebaseAuth.getInstance().currentUser!!.uid
-
+            val restaurantId = FirebaseAuth.getInstance().currentUser?.uid ?: return@setOnClickListener
+            val userId = order.userUid ?: return@setOnClickListener
             val pushKey = order.itemPushKey ?: return@setOnClickListener
 
-            FirebaseDatabase.getInstance().reference
-                .child("restaurantOrders")
-                .child(restaurantId)
-                .child(pushKey)
-                .updateChildren(
-                    mapOf(
-                        "orderAccepted" to true,
-                        "status" to "Accepted"
-                    )
-                )
+            val database = FirebaseDatabase.getInstance().reference
+
+            val updates = hashMapOf<String, Any>(
+                "restaurantOrders/$restaurantId/$pushKey/orderAccepted" to true,
+                "restaurantOrders/$restaurantId/$pushKey/status" to "Accepted",
+
+                "userOrders/$userId/$pushKey/orderAccepted" to true,
+                "userOrders/$userId/$pushKey/status" to "Accepted",
+
+                "OrderDetails/$pushKey/orderAccepted" to true,
+                "OrderDetails/$pushKey/status" to "Accepted"
+            )
+
+            database.updateChildren(updates)
                 .addOnSuccessListener {
 
-                    sendNotificationToUser(order)
+//                    sendNotificationToUser(order)
 
                     Toast.makeText(this, "Order Accepted", Toast.LENGTH_SHORT).show()
 
                     startActivity(Intent(this, OrderAcceptedActivity::class.java))
                     finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Failed to accept order", Toast.LENGTH_SHORT).show()
+                }
+        }
+
+        binding.orderReject.setOnClickListener {
+
+            val order = orderDetails ?: return@setOnClickListener
+            val restaurantId = FirebaseAuth.getInstance().currentUser?.uid ?: return@setOnClickListener
+            val userId = order.userUid ?: return@setOnClickListener
+            val pushKey = order.itemPushKey ?: return@setOnClickListener
+
+            val database = FirebaseDatabase.getInstance().reference
+
+            val updates = hashMapOf<String, Any>(
+                "restaurantOrders/$restaurantId/$pushKey/orderAccepted" to false,
+                "restaurantOrders/$restaurantId/$pushKey/status" to "Rejected",
+
+                "userOrders/$userId/$pushKey/orderAccepted" to false,
+                "userOrders/$userId/$pushKey/status" to "Rejected",
+
+                "OrderDetails/$pushKey/orderAccepted" to false,
+                "OrderDetails/$pushKey/status" to "Rejected"
+            )
+
+            database.updateChildren(updates)
+                .addOnSuccessListener {
+
+//                    sendRejectNotificationToUser(order)
+
+                    Toast.makeText(this, "Order Rejected", Toast.LENGTH_SHORT).show()
+
+                    finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Failed to reject order", Toast.LENGTH_SHORT).show()
                 }
         }
 
@@ -78,23 +117,28 @@ class OrderDetailsActivity : AppCompatActivity() {
             )
 
             binding.orderDetailRecyclerView.adapter = adapter
-
-            // Optional: show user info
-//            binding.o = it.userName
-//            binding.textPhone.text = it.phoneNumber
             binding.textViewAddress.text = it.address
             binding.textViewTotalAmount.text = it.totalPrice
         }
     }
 
-    private fun sendNotificationToUser(order: OrderDetails?) {
+//    private fun sendNotificationToUser(order: OrderDetails?) {
+//
+//        val userId = order?.userUid ?: return
+//        FirebaseDatabase.getInstance().reference
+//            .child("userNotifications")
+//            .child(userId)
+//            .push()
+//            .setValue("Your order has been accepted by the restaurant")
+//    }
 
-        val userId = order?.userUid ?: return
-
-        FirebaseDatabase.getInstance().reference
-            .child("userNotifications")
-            .child(userId)
-            .push()
-            .setValue("Your order has been accepted by the restaurant")
-    }
+//    private fun sendRejectNotificationToUser(order: OrderDetails?) {
+//
+//        val userId = order?.userUid ?: return
+//        FirebaseDatabase.getInstance().reference
+//            .child("userNotifications")
+//            .child(userId)
+//            .push()
+//            .setValue("Sorry, your order has been rejected by the restaurant")
+//    }
 }
