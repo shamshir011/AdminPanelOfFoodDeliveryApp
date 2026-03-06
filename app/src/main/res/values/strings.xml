@@ -96,6 +96,7 @@
     <string name="_299">299</string>
     <string name="currency">₹</string>
     <string name="new_orders">New Orders</string>
+    <string name="order_history">Order History</string>
 
 
 </resources>

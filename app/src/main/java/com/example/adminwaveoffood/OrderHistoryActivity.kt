@@ -32,6 +32,10 @@ class OrderHistoryActivity : AppCompatActivity() {
         adapter = OrderHistoryAdapter(this, historyOrderList)
         binding.recyclerView.adapter = adapter
         loadHistoryOrders()
+
+        binding.imageViewBackNavigation.setOnClickListener{
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
 

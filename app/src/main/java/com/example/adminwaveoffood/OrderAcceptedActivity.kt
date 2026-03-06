@@ -31,14 +31,14 @@ class OrderAcceptedActivity : AppCompatActivity() {
         adapter = OrderAdapter(this, acceptedOrderList)
         binding.orderAcceptedRecyclerView.adapter = adapter
         loadAcceptedOrders()
+        binding.imageViewBackNavigation.setOnClickListener{
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun loadAcceptedOrders() {
-
         binding.orderAcceptedProgressBar.visibility = View.VISIBLE
-
         val restaurantId = FirebaseAuth.getInstance().currentUser!!.uid
-
         FirebaseDatabase.getInstance().reference
             .child("restaurantOrders")
             .child(restaurantId)
