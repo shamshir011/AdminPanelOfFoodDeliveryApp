@@ -8,7 +8,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminwaveoffood.Adapter.OrderAdapter
-import com.example.adminwaveoffood.databinding.ActivityOrderAcceptedBinding
+import com.example.adminwaveoffood.Adapter.OrderHistoryAdapter
+import com.example.adminwaveoffood.databinding.ActivityOrderHistoryBinding
 import com.example.adminwaveoffood.model.OrderDetails
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -16,26 +17,27 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class OrderAcceptedActivity : AppCompatActivity() {
-    private val binding: ActivityOrderAcceptedBinding by lazy {
-        ActivityOrderAcceptedBinding.inflate(layoutInflater)
+class OrderHistoryActivity : AppCompatActivity() {
+    private val binding: ActivityOrderHistoryBinding by lazy {
+        ActivityOrderHistoryBinding.inflate(layoutInflater)
     }
-    private lateinit var adapter: OrderAdapter
-    private val acceptedOrderList = ArrayList<OrderDetails>()
-    override fun onCreate(savedInstanceState: Bundle?){
+    private lateinit var adapter: OrderHistoryAdapter
+    private val historyOrderList = ArrayList<OrderDetails>()
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        binding.orderAcceptedRecyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = OrderAdapter(this, acceptedOrderList)
-        binding.orderAcceptedRecyclerView.adapter = adapter
-        loadAcceptedOrders()
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = OrderHistoryAdapter(this, historyOrderList)
+        binding.recyclerView.adapter = adapter
+        loadHistoryOrders()
     }
 
-    private fun loadAcceptedOrders() {
 
-        binding.orderAcceptedProgressBar.visibility = View.VISIBLE
+    private fun loadHistoryOrders() {
+
+        binding.orderHistoryProgressBar.visibility = View.VISIBLE
 
         val restaurantId = FirebaseAuth.getInstance().currentUser!!.uid
 
@@ -46,7 +48,7 @@ class OrderAcceptedActivity : AppCompatActivity() {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
 
-                    acceptedOrderList.clear()
+                    historyOrderList.clear()
 
                     for (orderSnapshot in snapshot.children) {
 
@@ -56,14 +58,20 @@ class OrderAcceptedActivity : AppCompatActivity() {
 
                             order.itemPushKey = orderSnapshot.key
 
-                            if (order.status == "Accepted") {
-
-                                acceptedOrderList.add(order)
+                            // ✅ Show only completed orders in history
+                            if (order.status == "Delivered" ||
+                                order.status == "Rejected" ||
+                                order.status == "Accepted") {
+                                historyOrderList.add(order)
                             }
                         }
                     }
+
+                    // Show latest orders first
+                    historyOrderList.reverse()
+
                     adapter.notifyDataSetChanged()
-                    binding.orderAcceptedProgressBar.visibility = View.GONE
+                    binding.orderHistoryProgressBar.visibility = View.GONE
                 }
 
                 override fun onCancelled(error: DatabaseError) {}

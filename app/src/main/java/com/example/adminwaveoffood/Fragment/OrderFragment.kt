@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminwaveoffood.Adapter.OrderAdapter
 import com.example.adminwaveoffood.ManageCategoriesActivity
 import com.example.adminwaveoffood.OrderAcceptedActivity
-import com.example.adminwaveoffood.PendingOrderActivity
+import com.example.adminwaveoffood.OrderHistoryActivity
 import com.example.adminwaveoffood.databinding.FragmentOrderBinding
 import com.example.adminwaveoffood.model.OrderDetails
 import com.google.firebase.auth.FirebaseAuth
@@ -43,15 +43,16 @@ class OrderFragment : Fragment() {
 
         loadOrders()
 
-        binding.pendingOrder.setOnClickListener {
-            val intent = Intent(context, PendingOrderActivity::class.java)
-            startActivity(intent)
-        }
-
         binding.acceptedOrder.setOnClickListener {
             val intent = Intent(context, OrderAcceptedActivity::class.java)
             startActivity(intent)
         }
+
+        binding.textViewOrderHistory.setOnClickListener {
+            val intent = Intent(context, OrderHistoryActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
 
@@ -157,28 +158,19 @@ class OrderFragment : Fragment() {
 
                     orderList.clear()
 
-                    var pendingCount = 0
-                    var acceptedCount = 0   // 👈 NEW
-
                     for (orderSnapshot in snapshot.children){
 
                         val order = orderSnapshot.getValue(OrderDetails::class.java)
 
                         if (order != null) {
-
                             order.itemPushKey = orderSnapshot.key
 
-                            if (!order.orderAccepted) {
-                                orderList.add(order)   // Show only pending in list
-                                pendingCount++
-                            } else {
-                                acceptedCount++       // 👈 Count accepted
+                            // Show ONLY pending orders
+                            if (order.status == "Pending") {
+                                orderList.add(order)
                             }
                         }
                     }
-
-                    binding.textViewPendingCount.text = pendingCount.toString()
-                    binding.textViewAcceptedOrder.text = acceptedCount.toString() // 👈 NEW
 
                     adapter.notifyDataSetChanged()
                     binding.progressBar.visibility = View.GONE
