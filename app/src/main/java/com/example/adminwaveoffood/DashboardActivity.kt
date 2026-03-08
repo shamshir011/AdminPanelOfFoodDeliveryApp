@@ -16,11 +16,6 @@ class DashboardActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        binding.cardViewManageBanners.setOnClickListener {
-            val intent = Intent(this, AddBannerImageActivity::class.java)
-            startActivity(intent)
-        }
-
         binding.cardViewManageCategories.setOnClickListener {
             val intent = Intent(this, ManageCategoriesActivity::class.java)
             startActivity(intent)

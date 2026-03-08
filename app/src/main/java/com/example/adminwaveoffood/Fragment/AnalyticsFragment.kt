@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.Calendar
 
 class AnalyticsFragment : Fragment() {
 
@@ -33,28 +34,8 @@ class AnalyticsFragment : Fragment() {
         pendingOrders()
         analyticsGraph()
 
-//        val chart = binding.salesChart
-//        val entries = ArrayList<Entry>()
-//        entries.add(Entry(1f, 500f))
-//        entries.add(Entry(2f, 700f))
-//        entries.add(Entry(3f, 650f))
-//        entries.add(Entry(4f, 900f))
-//        entries.add(Entry(5f, 1000f))
-//
-//        val dataSet = LineDataSet(entries, "Sales")
-//
-//        dataSet.color = Color.BLUE
-//        dataSet.valueTextColor = Color.BLACK
-//        dataSet.lineWidth = 3f
-//
-//        val lineData = LineData(dataSet)
-//
-//        chart.data = lineData
-//        chart.invalidate()
-
         return binding.root
     }
-
     private fun countTotalOrders(){
         val database = FirebaseDatabase.getInstance().reference.child("OrderDetails")
 
@@ -65,7 +46,6 @@ class AnalyticsFragment : Fragment() {
 
                 binding.textViewTotalOrder.text = totalOrders.toString()
             }
-
             override fun onCancelled(error: DatabaseError) {
 
             }
@@ -129,53 +109,47 @@ class AnalyticsFragment : Fragment() {
             }
         })
     }
-
     private fun analyticsGraph() {
-
-        val days = listOf("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
-
         val database = FirebaseDatabase.getInstance().reference.child("OrderDetails")
-
         database.addListenerForSingleValueEvent(object : ValueEventListener {
-
             override fun onDataChange(snapshot: DataSnapshot) {
-
-                val entries = ArrayList<Entry>()
-                var index = 0f
-
-                for(orderSnapshot in snapshot.children){
-
-                    val status = orderSnapshot.child("status").value.toString()
-
-                    if(status == "Delivered"){
-
-                        val price = orderSnapshot.child("totalPrice")
-                            .value.toString().toFloatOrNull() ?: 0f
-
-                        entries.add(Entry(index, price))
-                        index++
-                    }
+                val tempEntries = ArrayList<Entry>()
+                // Collect delivered orders
+                for (orderSnapshot in snapshot.children) {
+                    val status = orderSnapshot.child("status").value?.toString() ?: continue
+                    if (status != "Delivered") continue
+                    val price = orderSnapshot.child("totalPrice")
+                        .value?.toString()?.toFloatOrNull() ?: 0f
+                    tempEntries.add(Entry(0f, price))
                 }
+                if (tempEntries.isEmpty()) {
+                    binding.salesChart.setNoDataText("No delivered orders yet")
+                    binding.salesChart.invalidate()
+                    return
+                }
+                // Reverse so oldest orders appear first
+                tempEntries.reverse()
+                // Create entries with proper x-values
+                val entries = ArrayList<Entry>()
+                for (i in tempEntries.indices) {
+                    entries.add(Entry(i.toFloat(), tempEntries[i].y))
+                }
+                val dataSet = LineDataSet(entries, "Sales").apply {
+                    color = Color.BLUE
+                    lineWidth = 3f
+                    setCircleColor(Color.BLUE)
+                    circleRadius = 5f
+                    setDrawValues(true)
+                    valueTextSize = 10f
+                    valueTextColor = Color.BLACK
 
-                val dataSet = LineDataSet(entries, "Sales")
-
-                dataSet.color = Color.BLUE
-                dataSet.lineWidth = 3f
-                dataSet.setCircleColor(Color.BLUE)
-                dataSet.circleRadius = 5f
-                dataSet.setDrawValues(true)
-                dataSet.valueTextSize = 10f
-                dataSet.valueTextColor = Color.BLACK
-
-                dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
-                dataSet.setDrawFilled(true)
-                dataSet.fillAlpha = 80
-                dataSet.fillColor = Color.BLUE
-
-                val lineData = LineData(dataSet)
-
+                    mode = LineDataSet.Mode.CUBIC_BEZIER
+                    setDrawFilled(true)
+                    fillAlpha = 80
+                    fillColor = Color.BLUE
+                }
                 val chart = binding.salesChart
-                chart.data = lineData
+                chart.data = LineData(dataSet)
 
                 chart.description.isEnabled = false
                 chart.setTouchEnabled(true)
@@ -186,7 +160,6 @@ class AnalyticsFragment : Fragment() {
 
                 val xAxis = chart.xAxis
                 xAxis.position = XAxis.XAxisPosition.BOTTOM
-                xAxis.valueFormatter = IndexAxisValueFormatter(days)
                 xAxis.granularity = 1f
                 xAxis.setDrawGridLines(false)
 
@@ -196,10 +169,9 @@ class AnalyticsFragment : Fragment() {
 
                 chart.invalidate()
             }
-
             override fun onCancelled(error: DatabaseError) {}
         })
-    }
 
+    }
 
 }

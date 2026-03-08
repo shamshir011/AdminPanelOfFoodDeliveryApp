@@ -61,59 +61,16 @@ class AddNewItemActivity : AppCompatActivity() {
             }
         }
     }
-//    private fun uploadData() {
-//
-//        val restaurantId = FirebaseAuth.getInstance().currentUser!!.uid
-//
-//        val menuRef = FirebaseDatabase.getInstance()
-//            .getReference("foodItem")
-//            .child(restaurantId)
-//
-//        val newItemKey = menuRef.push().key ?: return
-//
-//        if (itemImageUri != null) {
-//
-//            val storageRef = FirebaseStorage.getInstance().reference
-//            val imageRef = storageRef.child("item_images/$restaurantId/$newItemKey.jpg")
-//
-//            imageRef.putFile(itemImageUri!!)
-//                .addOnSuccessListener {
-//
-//                    imageRef.downloadUrl.addOnSuccessListener { downloadUrl ->
-//
-//                        val newItem = AddItem(
-//                            key = newItemKey,
-//                            restaurantId = restaurantId,
-//                            itemImage = downloadUrl.toString(),
-//                            title = title,
-//                            price = price,
-//                            description = description
-//                        )
-//
-//                        menuRef.child(newItemKey)
-//                            .setValue(newItem)
-//                            .addOnSuccessListener {
-//                                Toast.makeText(this, "Item Uploaded", Toast.LENGTH_SHORT).show()
-//                            }
-//                    }
-//                }
-//        }
-//    }
-
-
     private fun uploadData() {
-
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser == null){
             Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show()
             return
         }
-
         if (itemImageUri == null) {
             Toast.makeText(this, "Please select image", Toast.LENGTH_SHORT).show()
             return
         }
-
         val restaurantId = currentUser.uid
 
         val menuRef = FirebaseDatabase.getInstance()
@@ -160,9 +117,6 @@ class AddNewItemActivity : AppCompatActivity() {
                 Toast.makeText(this, "Image Upload Failed", Toast.LENGTH_SHORT).show()
             }
     }
-
-
-
     val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()){uri ->
         if(uri != null){
             binding.addImage.setImageURI(uri)

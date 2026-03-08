@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imageLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="100dp"
         android:src="@drawable/logo_food_image"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
         android:fontFamily="@font/lato_bold"
         android:text="@string/waves_of_food"
         android:textColor="@color/black"
-        android:textSize="40sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/imageLogo"
         app:layout_constraintStart_toStartOf="@+id/imageLogo"
         app:layout_constraintTop_toBottomOf="@+id/imageLogo" />

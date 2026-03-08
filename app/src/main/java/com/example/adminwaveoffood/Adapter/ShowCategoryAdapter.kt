@@ -7,11 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.adminwaveoffood.Adapter.MenuItemAdapter.ViewHolder
 import com.example.adminwaveoffood.UpdateCategoryDataActivity
-import com.example.adminwaveoffood.databinding.ItemItemBinding
 import com.example.adminwaveoffood.databinding.ManageCategoriesLayoutDesignBinding
-import com.example.adminwaveoffood.model.AllMenu
 import com.example.adminwaveoffood.model.FoodCategory
 import com.google.firebase.database.DatabaseReference
 
