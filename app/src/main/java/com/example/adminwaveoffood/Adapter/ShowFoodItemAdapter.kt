@@ -1,11 +1,13 @@
 package com.example.adminwaveoffood.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.adminwaveoffood.UpdateFoodItemActivity
 import com.example.adminwaveoffood.databinding.ManageCategoriesLayoutDesignBinding
 import com.example.adminwaveoffood.model.AddItem
 
@@ -48,8 +50,23 @@ class ShowFoodItemAdapter(
                 .load(Uri.parse(item.itemImage))
                 .into(binding.imageViewCategory)
 
+            // DELETE
             binding.btnDelete.setOnClickListener {
                 onDeleteClickListener(position)
+            }
+
+            // EDIT / UPDATE
+            binding.categoryEdit.setOnClickListener {
+
+                val intent = Intent(context, UpdateFoodItemActivity::class.java)
+
+                intent.putExtra("itemKey", item.key)
+                intent.putExtra("title", item.title)
+                intent.putExtra("price", item.price)
+                intent.putExtra("description", item.description)
+                intent.putExtra("imageUrl", item.itemImage)
+
+                context.startActivity(intent)
             }
         }
     }

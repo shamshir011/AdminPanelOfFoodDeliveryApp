@@ -21,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/backNavigation" />
 
     <ImageView
-        android:id="@+id/categoryImageUpdate"
+        android:id="@+id/imageViewUpdate"
         android:layout_width="175dp"
         android:layout_height="110dp"
         android:layout_marginStart="8dp"
@@ -40,9 +40,9 @@
         android:gravity="center"
         android:text="Change Image"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/categoryImageUpdate"
-        app:layout_constraintStart_toEndOf="@+id/categoryImageUpdate"
-        app:layout_constraintTop_toTopOf="@+id/categoryImageUpdate" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewUpdate"
+        app:layout_constraintStart_toEndOf="@+id/imageViewUpdate"
+        app:layout_constraintTop_toTopOf="@+id/imageViewUpdate" />
 
     <EditText
         android:id="@+id/categoryNameUpdate"
@@ -61,7 +61,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryImageUpdate" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewUpdate" />
 
     <TextView
         android:id="@+id/saveChanges"

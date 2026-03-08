@@ -16,12 +16,11 @@ class UpdateCategoryDataActivity : AppCompatActivity() {
     private var foodImageUri: Uri? = null
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val myReference: DatabaseReference = database.reference.child("FoodCategory")
-
     private lateinit var categoryId: String
     private var oldImageUrl: String = ""
     private var newImageUrl: String = ""
 
-    private val binding: ActivityUpdateCategoryDataBinding by lazy {
+    private val binding: ActivityUpdateCategoryDataBinding by lazy{
         ActivityUpdateCategoryDataBinding.inflate(layoutInflater)
     }
 
@@ -33,16 +32,12 @@ class UpdateCategoryDataActivity : AppCompatActivity() {
 
         getAndSetData()
 
-
-
         binding.textViewChangeImage.setOnClickListener {
             pickImage.launch("image/*")
         }
-
         binding.backNavigation.setOnClickListener{
             finish()
         }
-
         binding.saveChanges.setOnClickListener {
             val categoryName = binding.categoryNameUpdate.text.toString().trim()
 
@@ -76,18 +71,14 @@ class UpdateCategoryDataActivity : AppCompatActivity() {
 
         Glide.with(this)
             .load(oldImageUrl)
-            .into(binding.categoryImageUpdate)
+            .into(binding.imageViewUpdate)
     }
-
-
-
     private fun updateCategoryData(
         categoryId: String,
         categoryName: String,
         categoryImageUrl: String
     ) {
         val categoryRef = database.getReference("FoodCategory").child(categoryId)
-
         val updateData = hashMapOf<String, Any>(
             "foodCategoryName" to categoryName,
             "foodCategoryImage" to categoryImageUrl
@@ -101,11 +92,6 @@ class UpdateCategoryDataActivity : AppCompatActivity() {
                 Toast.makeText(this, "Category update failed 😢", Toast.LENGTH_SHORT).show()
             }
     }
-
-
-
-
-
     private fun uploadImageAndGetUrl(uri: Uri) {
         val storageRef = FirebaseStorage.getInstance()
             .reference
@@ -122,7 +108,7 @@ class UpdateCategoryDataActivity : AppCompatActivity() {
     }
     val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()){uri ->
         if(uri != null){
-            binding.categoryImageUpdate.setImageURI(uri)
+            binding.imageViewUpdate.setImageURI(uri)
             foodImageUri = uri
             uploadImageAndGetUrl(uri)
         }

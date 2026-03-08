@@ -98,6 +98,10 @@
     <string name="new_orders">New Orders</string>
     <string name="order_history">Order History</string>
     <string name="sales_overview">Sales Overview</string>
+    <string name="food_description">Food Description</string>
+    <string name="food_price">Food Price</string>
+    <string name="food_names">Food Name</string>
+    <string name="change_image">Change Image</string>
 
 
 </resources>
