@@ -97,6 +97,7 @@
     <string name="currency">₹</string>
     <string name="new_orders">New Orders</string>
     <string name="order_history">Order History</string>
+    <string name="sales_overview">Sales Overview</string>
 
 
 </resources>
