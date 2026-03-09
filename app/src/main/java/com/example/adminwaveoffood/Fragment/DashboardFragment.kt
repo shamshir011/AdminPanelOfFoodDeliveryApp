@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 class DashboardFragment : Fragment(){
 
     private lateinit var binding: FragmentDashboardBinding
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -29,7 +28,7 @@ class DashboardFragment : Fragment(){
     ): View? {
         binding = FragmentDashboardBinding.inflate(layoutInflater, container, false)
 
-        auth = FirebaseAuth.getInstance()
+
 
         binding.cardViewManageCategories.setOnClickListener {
             val intent = Intent(context, ManageCategoriesActivity::class.java)
@@ -43,13 +42,6 @@ class DashboardFragment : Fragment(){
         binding.manageFoodItemId.setOnClickListener {
             val intent = Intent(context, ManageFoodItemActivity::class.java)
             startActivity(intent)
-        }
-
-        binding.buttonLogOut.setOnClickListener {
-            auth.signOut()
-            val intent = Intent(context, LoginActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
         }
 
         return binding.root

@@ -10,44 +10,20 @@
     android:paddingStart="15dp"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_food_image"/>
-
-
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/yeon_sung"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/lato_bold"
         android:text="@string/login_to_your_nadmin_dashboard"
+        android:textAlignment="center"
         android:textColor="@color/textColor"
         android:textSize="20sp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/textView8"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:fontFamily="@font/lato_bold" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/yeon_sung"
-        android:text="Waves Of Food"
-        android:textColor="@color/black"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
         android:id="@+id/password"
@@ -90,19 +66,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/yeon_sung"
         android:text="@string/or"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/password"
         app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toBottomOf="@+id/password"/>
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/yeon_sung"
         android:text="@string/continue_with"
         android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="@+id/textView9"
@@ -147,7 +121,6 @@
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/greenbuttongradient"
-        android:fontFamily="@font/yeon_sung"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -162,25 +135,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/lato"
         android:text="@string/don_t_have_account"
         android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="@+id/loginButton"
         app:layout_constraintStart_toStartOf="@+id/loginButton"
         app:layout_constraintTop_toBottomOf="@+id/loginButton"/>
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/yeon_sung"
-        android:text="@string/shamshir"
-        android:textAlignment="center"
-        android:textColor="@color/textColor"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,16 +8,31 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.auth.FirebaseAuth
 
 class SplashScreenActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash_screen)
+
+        auth = FirebaseAuth.getInstance()
+
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+
+            val currentUser = auth.currentUser
+
+            if (currentUser != null) {
+                startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+
             finish()
-        },3000)
+
+        }, 3000)
     }
 }

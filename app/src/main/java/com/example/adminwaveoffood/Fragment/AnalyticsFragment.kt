@@ -9,6 +9,7 @@ import android.graphics.Color
 import com.example.adminwaveoffood.databinding.FragmentAnalyticsBinding
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -36,36 +37,63 @@ class AnalyticsFragment : Fragment() {
 
         return binding.root
     }
-    private fun countTotalOrders(){
-        val database = FirebaseDatabase.getInstance().reference.child("OrderDetails")
+    private fun countTotalOrders() {
+
+        val restaurantId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        val database = FirebaseDatabase.getInstance()
+            .getReference("OrderDetails")
+            .orderByChild("restaurantId")
+            .equalTo(restaurantId)
 
         database.addListenerForSingleValueEvent(object : ValueEventListener {
+
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 val totalOrders = snapshot.childrenCount
 
                 binding.textViewTotalOrder.text = totalOrders.toString()
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
     }
 
-    private fun totalEarning(){
-        val database = FirebaseDatabase.getInstance().reference.child("OrderDetails")
+    private fun totalEarning() {
+
+        val restaurantId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        val database = FirebaseDatabase.getInstance()
+            .getReference("OrderDetails")
+            .orderByChild("restaurantId")
+            .equalTo(restaurantId)
+
         database.addListenerForSingleValueEvent(object : ValueEventListener {
+
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 var totalEarnings = 0
-                for(orderSnapshot in snapshot.children){
+
+                for (orderSnapshot in snapshot.children) {
+
                     val status = orderSnapshot.child("status").value.toString()
-                    if(status == "Delivered"){   // Only count completed orders
-                        val price = orderSnapshot.child("totalPrice").value.toString().toIntOrNull() ?: 0
+
+                    if (status == "Delivered") {
+
+                        val price = orderSnapshot.child("totalPrice")
+                            .value
+                            .toString()
+                            .toIntOrNull() ?: 0
+
                         totalEarnings += price
                     }
                 }
+
                 binding.textViewTotalEarn.text = "₹$totalEarnings"
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
@@ -73,18 +101,32 @@ class AnalyticsFragment : Fragment() {
     }
 
     private fun rejectedOrders(){
-        val database = FirebaseDatabase.getInstance().reference.child("OrderDetails")
+
+        val restaurantId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        val database = FirebaseDatabase.getInstance()
+            .getReference("OrderDetails")
+            .orderByChild("restaurantId")
+            .equalTo(restaurantId)
+
         database.addListenerForSingleValueEvent(object : ValueEventListener {
+
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 var rejectedOrders = 0
+
                 for(orderSnapshot in snapshot.children){
+
                     val status = orderSnapshot.child("status").value.toString()
+
                     if(status == "Rejected"){
                         rejectedOrders++
                     }
                 }
+
                 binding.textViewRejectOrder.text = rejectedOrders.toString()
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
@@ -110,7 +152,11 @@ class AnalyticsFragment : Fragment() {
         })
     }
     private fun analyticsGraph() {
+
+        val restaurantId = FirebaseAuth.getInstance().currentUser?.uid
         val database = FirebaseDatabase.getInstance().reference.child("OrderDetails")
+            .orderByChild("restaurantId").equalTo(restaurantId)
+
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val tempEntries = ArrayList<Entry>()
@@ -128,7 +174,7 @@ class AnalyticsFragment : Fragment() {
                     return
                 }
                 // Reverse so oldest orders appear first
-                tempEntries.reverse()
+//                tempEntries.reverse()
                 // Create entries with proper x-values
                 val entries = ArrayList<Entry>()
                 for (i in tempEntries.indices) {

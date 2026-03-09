@@ -9,78 +9,22 @@
     android:background="@color/white"
     tools:context=".SignUpActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo"/>
-
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/yeon_sung"
+        android:layout_height="38dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/lato_bold"
         android:text="@string/adming_dashboard"
         android:textAlignment="center"
         android:textColor="@color/textColor"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView8"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:fontFamily="@font/lato_bold" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/lato_bold"
-        android:text="Food Delivery App"
-        android:textColor="@color/black"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/textView4"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:fontFamily="@font/yeon_sung"-->
-<!--        android:text="Choose Your Location"-->
-<!--        android:textColor="@color/textColor"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/textInputLayout" />-->
-
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/textInputLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="57dp"-->
-<!--        android:layout_marginStart="32dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="32dp"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"-->
-<!--        app:endIconDrawable="@drawable/arrow_circle_down"-->
-<!--        app:boxStrokeWidthFocused="0dp"-->
-<!--        app:boxStrokeWidth="0dp"-->
-<!--        app:endIconTint="@color/black"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textView7">-->
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/listOfLocation"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="@string/choose_location"-->
-<!--            android:inputType="none"-->
-<!--            android:fontFamily="@font/lato"/>-->
-
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
     <EditText
         android:id="@+id/restaurantName"
@@ -140,7 +84,6 @@
         android:layout_height="57dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/greenbuttongradient"
-        android:fontFamily="@font/yeon_sung"
         android:text="@string/create_account"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -155,7 +98,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/lato"
         android:text="@string/already_have_an_account"
         android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="@+id/createUserButton"
@@ -181,18 +123,4 @@
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/yeon_sung"
-        android:text="@string/shamshir"
-        android:textAlignment="center"
-        android:textColor="@color/textColor"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
