@@ -9,11 +9,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.adminwaveoffood.Adapter.CategoryAdapter
 import com.example.adminwaveoffood.databinding.ActivityManageRestaurantBinding
 import com.example.adminwaveoffood.model.FoodCategory
 import com.example.adminwaveoffood.model.Restaurant
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import java.util.Calendar
 
@@ -21,6 +28,9 @@ class ManageRestaurantActivity : AppCompatActivity() {
     private val binding: ActivityManageRestaurantBinding by lazy {
         ActivityManageRestaurantBinding.inflate(layoutInflater)
     }
+    val categoryNames = ArrayList<String>()
+    val selectedCategories = HashMap<String, Boolean>()
+    lateinit var adapter: CategoryAdapter
 
     private var foodImageUri: Uri? = null
     private lateinit var restaurantName: String
@@ -72,12 +82,11 @@ class ManageRestaurantActivity : AppCompatActivity() {
             restaurantDeliveryDuration = binding.etDeliveryDuration.text.toString().trim()
             restaurantOpeningTime = binding.openingTime.text.toString().trim()
             restaurantClosingTime = binding.closingTime.text.toString().trim()
-//            restaurantStatus = binding.switchStatus.isChecked
 
             if(!(restaurantName.isBlank() || restaurantPhone.isBlank() || restaurantAddress.isBlank()
                         || restaurantDeliveryRadius.isBlank() || restaurantDeliveryDuration.isBlank() || restaurantOpeningTime.isBlank()  || restaurantClosingTime.isBlank())){
                 uploadData()
-                binding.restaurantImage.setImageDrawable(null)
+                binding.restaurantImage.setImageResource(R.drawable.add_category_item_icon)
                 binding.etName.setText("")
                 binding.etPhone.setText("")
                 binding.etAddress.setText("")
@@ -95,6 +104,13 @@ class ManageRestaurantActivity : AppCompatActivity() {
         binding.textViewSelectImage.setOnClickListener{
             pickImage.launch("image/*")
         }
+
+
+
+        adapter = CategoryAdapter(this, categoryNames, selectedCategories)
+        binding.checkBoxCategoryRecyclerView.layoutManager = LinearLayoutManager(this,RecyclerView.HORIZONTAL, false)
+        binding.checkBoxCategoryRecyclerView.adapter = adapter
+        loadCheckBoxCategory()
     }
 
     private fun openTimePicker() {
@@ -132,29 +148,38 @@ class ManageRestaurantActivity : AppCompatActivity() {
             true
         ).show()
     }
+
+    private fun loadCheckBoxCategory(){
+        val ref = FirebaseDatabase.getInstance().reference.child("FoodCategory")
+
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                categoryNames.clear()
+
+                for (data in snapshot.children) {
+
+                    val name = data.child("foodCategoryName")
+                        .getValue(String::class.java)
+
+                    if (name != null) {
+                        categoryNames.add(name)
+                    }
+                }
+
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
     private fun uploadData() {
 
-        val categoryMap = hashMapOf<String, Boolean>()
-
-        if (binding.cbPizza.isChecked) {
-            categoryMap["Pizza"] = true
-        }
-
-        if (binding.cbItalian.isChecked) {
-            categoryMap["Italian"] = true
-        }
-
-        if (binding.cbFastFood.isChecked) {
-            categoryMap["FastFood"] = true
-        }
-
-        if (categoryMap.isEmpty()) {
+        if (selectedCategories.isEmpty()) {
             Toast.makeText(this, "Please select at least one category", Toast.LENGTH_SHORT).show()
             return
         }
-
-
-
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser == null) {
             Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show()
@@ -188,13 +213,18 @@ class ManageRestaurantActivity : AppCompatActivity() {
                         restaurantAddress = restaurantAddress,
                         restaurantDeliveryRadius = restaurantDeliveryRadius,
                         restaurantDeliveryDuration = restaurantDeliveryDuration,
-                        restaurantCategories = categoryMap,
+                        restaurantCategories = HashMap(selectedCategories),
                         restaurantOpeningTime = restaurantOpeningTime,
                         restaurantClosingTime = restaurantClosingTime
                     )
 
                     menuRef.setValue(newItem)
                         .addOnSuccessListener {
+
+                            selectedCategories.clear()
+                            adapter.notifyDataSetChanged()
+                            foodImageUri = null
+
                             Toast.makeText(this, "Data uploaded successfully", Toast.LENGTH_SHORT).show()
                         }
                         .addOnFailureListener {

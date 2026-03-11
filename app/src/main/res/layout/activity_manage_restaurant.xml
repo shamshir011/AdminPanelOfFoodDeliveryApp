@@ -38,7 +38,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21"
         app:srcCompat="@drawable/add_category_item_icon" />
@@ -304,84 +304,6 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-
-<!--    <com.google.android.material.card.MaterialCardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginTop="4dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        app:cardCornerRadius="10dp"-->
-<!--        app:cardElevation="2dp"-->
-<!--        app:cardUseCompatPadding="true"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/materialCardView">-->
-
-<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-
-<!--            &lt;!&ndash; Left : Status Text &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:id="@+id/tvStatusLeft"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="12dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:fontFamily="@font/lato"-->
-<!--                android:text="@string/status"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textStyle="bold"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/statusLeftOpen"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="8dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:fontFamily="@font/lato"-->
-<!--                android:text="@string/open"-->
-<!--                android:textColor="@color/darkGreen"-->
-<!--                android:textSize="15sp"-->
-<!--                android:textStyle="bold"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/tvStatusLeft"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/tvStatusLeft"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/tvStatusLeft" />-->
-
-<!--            &lt;!&ndash; Right : Open text &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:id="@+id/statusRightOpen"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                android:text="@string/open"-->
-<!--                android:textColor="@color/darkGreen"-->
-<!--                android:textSize="16sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/switchStatus"-->
-<!--                app:layout_constraintEnd_toStartOf="@+id/switchStatus"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/switchStatus" />-->
-
-<!--            &lt;!&ndash; Toggle &ndash;&gt;-->
-<!--            <com.google.android.material.switchmaterial.SwitchMaterial-->
-<!--                android:id="@+id/switchStatus"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="12dp"-->
-<!--                android:checked="true"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
-<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--    </com.google.android.material.card.MaterialCardView>-->
-
-
-
     <TextView
         android:id="@+id/uploadData"
         android:layout_width="220dp"
@@ -409,43 +331,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardViewDeliveryDuration">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/checkBoxCategoryRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <CheckBox
-                android:id="@+id/cbPizza"
-                android:layout_width="94dp"
-                android:layout_height="43dp"
-                android:layout_marginStart="8dp"
-                android:text="@string/pizza"
-                android:textColor="#717171"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <CheckBox
-                android:id="@+id/cbItalian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/italian"
-                android:textColor="#717171"
-                app:layout_constraintBottom_toBottomOf="@+id/cbPizza"
-                app:layout_constraintEnd_toStartOf="@+id/cbFastFood"
-                app:layout_constraintStart_toEndOf="@+id/cbPizza"
-                app:layout_constraintTop_toTopOf="@+id/cbPizza" />
-
-            <CheckBox
-                android:id="@+id/cbFastFood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/fast_food"
-                android:textColor="#717171"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent"/>
     </androidx.cardview.widget.CardView>
 
 
